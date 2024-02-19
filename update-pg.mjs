@@ -271,6 +271,10 @@ let currentOra = null;
 				options.ssl.rejectUnauthorized = false;
 			}
     }
+    
+    if (process.env.PGSSLCERT) {
+      options.ssl.ca = process.env.PGSSLCERT;
+    }
 
     const pool = new pg.Pool(options);
     pgClient = await pool.connect();
